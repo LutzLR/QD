@@ -1,0 +1,768 @@
+* Quer.wfm
+** END HEADER *
+
+local f
+f = new QuerFORM()
+f.mdi = .F. && ensure not MDI
+f.ReadModal()
+
+CLASS QuerFORM OF FORM
+   this.Width = 54
+   this.Text = "QD "+v
+   this.Left = 14
+   this.Top = 1
+   this.Height = 28
+   this.SysMenu = .F.
+   this.Maximize = .F.
+   this.Minimize = .F.
+   this.Sizeable = .F.
+   this.OnGotFocus = CLASS::FORM_ONGOTFOCUS
+   this.OnOpen = CLASS::FORM_ONOPEN
+   this.OnClose = CLASS::FORM_ONCLOSE
+   this.MenuFile = "qd.mnu"
+
+   * Grafische Elemente
+   
+   DEFINE SHAPE SHAPE1 OF THIS;
+       PROPERTY; 
+         Width 4,;
+         Left 2,;
+         Top 0.5,;
+         ShapeStyle 5,;
+         ColorNormal "R+/R+",;
+         PenWidth 1,;
+         Height 2
+
+   DEFINE LINE LINIE1 OF THIS;
+       PROPERTY; 
+         Width 1,;
+         Right 50,;
+         Bottom 1.5,;
+         Left 6,;
+         Top 1.5,;
+         ColorNormal "N"
+
+   DEFINE SHAPE SHAPE2 OF THIS;
+       PROPERTY; 
+         Width 4,;
+         Left 18,;
+         Top 2.5,;
+         ColorNormal "RG+/RG+",;
+         PenWidth 1,;
+         Height 1
+
+   DEFINE SHAPE SHAPE3 OF THIS;
+       PROPERTY; 
+         Width 4,;
+         Left 28,;
+         Top 2.5,;
+         ColorNormal "RG+/RG+",;
+         PenWidth 1,;
+         Height 1
+
+   DEFINE SHAPE SHAPE4 OF THIS;
+       PROPERTY; 
+         Width 4,;
+         Left 38,;
+         Top 2.5,;
+         ColorNormal "RG+/RG+",;
+         PenWidth 1,;
+         Height 1
+
+   DEFINE SHAPE SHAPE5 OF THIS;
+       PROPERTY; 
+         Width 4,;
+         Left 48,;
+         Top 2.5,;
+         ColorNormal "RG+/RG+",;
+         PenWidth 1,;
+         Height 1
+
+   DEFINE LINE LINIE2 OF THIS;
+       PROPERTY; 
+         Width 1,;
+         Right 20,;
+         Bottom 2.5,;
+         Left 20,;
+         Top 1.5,;
+         ColorNormal "N"
+
+   DEFINE LINE LINIE3 OF THIS;
+       PROPERTY; 
+         Width 1,;
+         Right 30,;
+         Bottom 2.5,;
+         Left 30,;
+         Top 1.5,;
+         ColorNormal "N"
+
+   DEFINE LINE LINIE4 OF THIS;
+       PROPERTY; 
+         Width 1,;
+         Right 40,;
+         Bottom 2.5,;
+         Left 40,;
+         Top 1.5,;
+         ColorNormal "N"
+
+   DEFINE LINE LINIE5 OF THIS;
+       PROPERTY; 
+         Width 1,;
+         Right 50,;
+         Bottom 2.5,;
+         Left 50,;
+         Top 1.5,;
+         ColorNormal "N"
+
+   * 3 waagerechte Linien
+
+   DEFINE LINE LINIE6 OF THIS;
+       PROPERTY; 
+         Width 1,;
+         Right 52,;
+         Bottom 5,;
+         Left 2,;
+         Top 5,;
+         ColorNormal "WindowText"
+
+   DEFINE LINE LINIE7 OF THIS;
+       PROPERTY; 
+         Width 1,;
+         Right 52,;
+         Bottom 8,;
+         Left 2,;
+         Top 8,;
+         ColorNormal "WindowText"   
+   
+   DEFINE LINE LINIE8 OF THIS;
+       PROPERTY; 
+         Width 1,;
+         Right 52,;
+         Bottom 17,;
+         Left 2,;
+         Top 17,;
+         ColorNormal "N"
+
+   * Eingabefelder
+
+   DEFINE RADIOBUTTON OPTIONSFELD1 OF THIS;
+       PROPERTY; 
+         Width 14,;
+         Left 3,;
+         Top 5.5,;
+         Text "Kupfer",;
+         FontBold .F.,;
+         Group .T.,;
+         Value .T.,;
+         Height 1.1465,;
+         OnChange CLASS::SPINBOX_ONCHANGE
+
+   DEFINE RADIOBUTTON OPTIONSFELD2 OF THIS;
+       PROPERTY; 
+         Width 14,;
+         Left 3,;
+         Top 6.5,;
+         Text "Aluminium",;
+         FontBold .F.,;
+         Group .F.,;
+         Value .F.,;
+         Height 1.1465,;
+         OnChange CLASS::SPINBOX_ONCHANGE
+
+   DEFINE RADIOBUTTON OPTIONSFELD4 OF THIS;
+       PROPERTY; 
+         Width 16,;
+         Left 28,;
+         Top 5.5,;
+         Text "Drehstrom",;
+         FontBold .F.,;
+         Group .T.,;
+         Value .T.,;
+         Height 1.1465,;
+         OnChange CLASS::SPINBOX_ONCHANGE   
+
+   DEFINE RADIOBUTTON OPTIONSFELD3 OF THIS;
+       PROPERTY; 
+         Width 16,;
+         Left 28,;
+         Top 6.5,;
+         Text "Wechselstrom",;
+         FontBold .F.,;
+         Group .F.,;
+         Value .F.,;
+         Height 1.1465,;
+         OnChange CLASS::SPINBOX_ONCHANGE
+   
+   * Nennspannung
+      
+   DEFINE TEXT TEXT1 OF THIS;
+       PROPERTY; 
+         Width 38,;
+         FontBold .F.,;
+         Text "Nennspannung (V) :",;
+         Left 2,;
+         Top 9,;
+         Alignment 5,;
+         Height 1
+
+   DEFINE SPINBOX wippregler1 OF THIS;
+       PROPERTY; 
+         Width 10,;
+         FontBold .F.,;
+         Rangemax 20000,;
+         Rangemin 1,;
+         RangeRequired .T.,;
+         Step 1,;
+         Value 400,;
+         Picture "99999",;
+         Function "J",;
+         Left 42,;
+         Top 9,;
+         Height 1,;
+         OnChange CLASS::SPINBOX_ONCHANGE
+
+   * Spannungsfall
+   
+   DEFINE TEXT TEXT2 OF THIS;
+       PROPERTY; 
+         Width 38,;
+         FontBold .F.,;
+         Text "zul. Spannungsfall über die ges. Länge (%) :",;
+         Left 2,;
+         Top 10,;
+         Alignment 5,;
+         Height 1
+
+   DEFINE SPINBOX wippregler2 OF THIS;
+       PROPERTY; 
+         Width 10,;
+         FontBold .F.,;
+         Rangemax 10.0,;
+         Rangemin 0.1,;
+         RangeRequired .T.,;
+         Step 0.1,;
+         Picture "99.9",;
+         Function "J",;
+         Value 3.0,;
+         Left 42,;
+         Top 10,;
+         Height 1,;
+         OnChange CLASS::SPINBOX_ONCHANGE
+
+   * Kabellänge
+   
+   DEFINE TEXT TEXT3 OF THIS;
+       PROPERTY; 
+         Width 38,;
+         FontBold .F.,;
+         Text "gesamte Kabellänge (m) :",;
+         Left 2,;
+         Top 11,;
+         Alignment 5,;
+         Height 1
+
+   DEFINE spinbox wippregler3 OF THIS;
+       PROPERTY; 
+         Width 10,;
+         FontBold .F.,;
+         Rangemax 10000,;
+         Rangemin 1,;
+         RangeRequired .T.,;
+         Step 1,;
+         Picture "99999",;
+         Function "J",;
+         Value 1,;
+         Left 42,;
+         Top 11,;
+         Height 1,;
+         OnChange CLASS::SPINBOX_ONCHANGE
+
+   * 1. Teillänge
+   
+   DEFINE TEXT TEXT9 OF THIS;
+       PROPERTY; 
+         Width 38,;
+         FontBold .F.,;
+         Text "1. Teilänge (m) :",;
+         Left 2,;
+         Top 12,;
+         Alignment 5,;
+         Height 1
+
+   DEFINE spinbox wippregler6 OF THIS;
+       PROPERTY; 
+         Width 10,;
+         FontBold .F.,;
+         Rangemax 10000,;
+         Rangemin 1,;
+         RangeRequired .T.,;
+         Step 1,;
+         Picture "99999",;
+         Function "J",;
+         Value 1,;
+         Left 42,;
+         Top 12,;
+         Height 1,;
+         OnChange CLASS::SPINBOX_ONCHANGE
+
+   * Anzahl der Anschlußpunkte
+   
+   DEFINE TEXT TEXT4 OF THIS;
+       PROPERTY; 
+         Width 38,;
+         FontBold .F.,;
+         Text "Anzahl der Anschlusspunkte (Stück) :",;
+         Left 2,;
+         Top 13,;
+         Alignment 5,;
+         Height 1
+
+   DEFINE SPINBOX wippregler4 OF THIS;
+       PROPERTY; 
+         Width 10,;
+         FontBold .F.,;
+         Rangemax 1000,;
+         Rangemin 1,;
+         RangeRequired .T.,;
+         Step 1,;
+         Picture "9999",;
+         Function "J",;
+         Value 1,;
+         Left 42,;
+         Top 13,;
+         Height 1,;
+         OnChange CLASS::SPINBOX_ONCHANGE
+
+   * Leistung je Anschlußpunkt
+   
+   DEFINE TEXT TEXT5 OF THIS;
+       PROPERTY; 
+         Width 38,;
+         FontBold .F.,;
+         Text "Scheinleistung je Anschlusspunkt (VA) :",;
+         Left 2,;
+         Top 14,;
+         Alignment 5,;
+         Height 1
+
+   DEFINE spinbox wippregler5 OF THIS;
+       PROPERTY; 
+         Width 10,;
+         FontBold .F.,;
+         Rangemax 400000,;
+         Rangemin 1,;
+         RangeRequired .T.,;
+         Step 1,;
+         Value 1,;
+         Picture "999999",;
+         Function "J",;
+         Left 42,;
+         Top 14,;
+         Height 1,;
+         OnChange CLASS::SPINBOX_ONCHANGE
+
+   * Temperatur
+      
+   DEFINE TEXT TEXT10 OF THIS;
+       PROPERTY; 
+         Width 38,;
+         FontBold .F.,;
+         Text "Leitertemperatur (Grad Celsius) :",;
+         Left 2,;
+         Top 15,;
+         Alignment 5,;
+         Height 1
+
+   DEFINE spinbox wippregler10 OF THIS;
+       PROPERTY; 
+         Width 10,;
+         FontBold .F.,;
+         Rangemax 80,;
+         Rangemin 10,;
+         RangeRequired .T.,;
+         Step 1,;
+         Value 70,;
+         Picture "99",;
+         Function "J",;
+         Left 42,;
+         Top 15,;
+         Height 1,;
+         OnChange CLASS::SPINBOX_ONCHANGE
+
+   * Berechnung:
+   
+   DEFINE PUSHBUTTON SCHALTFLAECHE1 OF THIS;
+       PROPERTY; 
+         Width 50,;
+         FontBold .F.,;
+         Text "Querschnitt berechnen !",;
+         Left 2,;
+         OnClick CLASS::SCHALTFLAECHE1_ONCLICK,;
+         Top 18,;
+         Group .T.,;
+         SpeedTip "Berechnung starten",;
+         DisabledBitmap "RESOURCE #1010 qd.DLL",;
+         FocusBitmap "RESOURCE #1010 qd.DLL",;
+         UpBitmap "RESOURCE #1010 qd.DLL",;
+         DownBitmap "RESOURCE #1010 qd.DLL",;         
+         Height 1.5
+
+   * Ergebnisse
+   
+   DEFINE TEXT TEXT6 OF THIS;
+       PROPERTY; 
+         Width 38,;
+         FontBold .F.,;
+         Text "Querschnitt (qmm) :",;
+         Left 2,;
+         Top 20.5,;
+         Alignment 5,;
+         Height 1
+
+   DEFINE ENTRYFIELD eingabefeld1 OF THIS;
+       PROPERTY; 
+         Width 10,;
+         FontBold .F.,;
+         Enabled .F.,;
+         Value "",;
+         Picture "9999999.9",;
+         Left 42,;
+         MaxLength 10,;
+         Top 20.5,;
+         Height 1
+
+   DEFINE TEXT TEXT7 OF THIS;
+       PROPERTY; 
+         Width 38,;
+         FontBold .F.,;
+         Text "Gesamtscheinstrom (A) :",;
+         Left 2,;
+         Top 21.5,;
+         Alignment 5,;
+         Height 1
+
+   DEFINE ENTRYFIELD eingabefeld2 OF THIS;
+       PROPERTY; 
+         Width 10,;
+         FontBold .F.,;
+         Enabled .F.,;
+         Value "",;
+         Picture "9999999.9",;
+         Left 42,;
+         MaxLength 9,;
+         Top 21.5,;
+         Height 1
+
+   DEFINE TEXT TEXT8 OF THIS;
+       PROPERTY; 
+         Width 38,;
+         FontBold .F.,;
+         Text "Gesamtscheinleistung (VA) :",;
+         Left 2,;
+         Top 22.5,;
+         Alignment 5,;
+         Height 1
+
+   DEFINE ENTRYFIELD eingabefeld3 OF THIS;
+       PROPERTY; 
+         Width 10,;
+         FontBold .F.,;
+         Enabled .F.,;
+         Value "",;
+         Picture "9999999.9",;
+         Left 42,;
+         MaxLength 9,;
+         Top 22.5,;
+         Height 1
+
+   * Bemerkung
+   
+   DEFINE ENTRYFIELD eingabefeld4 OF THIS;
+       PROPERTY; 
+         Width 50,;
+         FontBold .F.,;
+         Enabled .F.,;
+         Value "",;
+         Left 2,;
+         Top 23.5,;
+         Height 1
+
+   * Ende
+   
+   DEFINE PUSHBUTTON SCHALTFLAECHE3 OF THIS;
+       PROPERTY; 
+         Width 50,;
+         FontBold .F.,;
+         Text "Exit !",;
+         Left 2,;
+         OnClick CLASS::SCHALTFLAECHE3_ONCLICK,;
+         Top 25.5,;
+         Group .T.,;
+         SpeedTip "Programm beenden",;
+         DisabledBitmap "RESOURCE #28 qd.DLL",;
+         FocusBitmap "RESOURCE #28 qd.DLL",;
+         UpBitmap "RESOURCE #28 qd.DLL",;
+         DownBitmap "RESOURCE #28 qd.DLL",;         
+         Height 1.5
+
+   * Berechnung
+   
+   Procedure SCHALTFLAECHE1_OnClick
+      store "" to form.eingabefeld1.value  && Löschen evtl. Anzeigen d. Querschnitts
+      store "" to form.eingabefeld2.value  && Löschen evtl. Anzeigen d. Scheinstroms
+      store "" to form.eingabefeld3.value  && Löschen evtl. Anzeigen d. Scheinleistung
+      store space(40)+"Bitte warten !" to bem
+      store bem to form.eingabefeld4.value  && Anzeige der Bemerkung zur Laufzeit
+      if form.optionsfeld1.value=.T.  && Auswertung der Einstellung Kupfer
+         store 56.0 to ka
+      endif
+      if form.optionsfeld2.value=.T.  && Auswertung der Einstellung Aluminium
+         store 34.8 to ka
+      endif   
+      if form.optionsfeld3.value=.T.  && Auswertung der Einstellung Wechselstrom
+         store 0 to dstrom
+      endif
+      if form.optionsfeld4.value=.T.  && Auswertung der Einstellung Drehstrom
+         store 1 to dstrom
+      endif   
+      store form.wippregler1.value to un  && Nennspannung in Volt lesen
+      store form.wippregler2.value to u  && Spannungsfall in Prozent lesen
+      store form.wippregler3.value to l  && ges. Kabellänge in Meter lesen
+      store form.wippregler6.value to t1  && 1. Teillänge in Meter lesen
+      store form.wippregler4.value to z  && Anzahl der Anschlußpunkte lesen
+      store form.wippregler5.value to s  && Scheinleistung je Anschluß lesen
+      store form.wippregler10.value to tp1  && Temperatur in Grad Celsius lesen
+      store 1+0.004*(tp1-20) to tp2  && Faktor aus Temperatur berechnen
+      store "" to bem
+      store un*u/100 to u  && Berech. des zul. Spannungsfalls in Volt
+      if t1>l
+         store l to t1,form.wippregler6.value  && Korrektur der 1. Teillänge
+         store "   1.Teillänge korrigiert!" to bem
+      endif
+      if l>t1
+         if z=1
+            store 2 to z,form.wippregler4.value  && Korrektur von z !
+            store bem+"   Anzahl der Anschlußpunkte korrigiert!" to bem
+         endif
+         store (l-t1)/(z-1) to tl  && Berech. Teillängen 2 bis n
+      else   
+         if z>1
+            store 1 to z,form.wippregler4.value  && Korrektur von z !
+            store bem+"   Anzahl der Anschlußpunkte korrigiert!" to bem
+         endif
+         store l to tl  && Berech. der Teillänge
+      endif
+		*
+      store 1 to z1  && Zeilenzähler für Array1 auf Zeile 1 setzen
+      store un+1 to urech  && Setzen der Startbedingungen 1.Schleife
+      do while urech>u  && Prüfung Spannungsfall
+			TxtArr2 = new Array(1,9)  && TxtArr2 initialisieren, da neuer Umlauf
+	      store 0 to z2  && Zeilenzähler für Array2 auf 0 setzen
+         store s to srech  && Setzen der Startbedingungen 2.Schleife 
+         store z to zrech  && Setzen der Startbedingungen 2.Schleife
+         store 0 to urech  && Setzen der Startbedingungen 2.Schleife
+         do while zrech>0  && Prüfung Anschlußpunkte
+            if zrech=1
+               if dstrom=0
+                  if ka<56
+                     store urech+(2*t1*srech*sqrt((TxtArr1[z1,3]*tp2*TxtArr1[z1,3]*tp2)+(TxtArr1[z1,4]*TxtArr1[z1,4]))/(un*1000)) to urech
+                        * Berech. Spannungsfall d. 1. Teillänge, Wechselstrom, Al
+                  else
+                     store urech+(2*t1*srech*sqrt((TxtArr1[z1,2]*tp2*TxtArr1[z1,2]*tp2)+(TxtArr1[z1,4]*TxtArr1[z1,4]))/(un*1000)) to urech
+                        * Berech. Spannungsfall d. 1. Teillänge, Wechselstrom, Cu
+                  endif
+               else
+                  if ka<56
+                     store urech+(t1*srech*sqrt((TxtArr1[z1,3]*tp2*TxtArr1[z1,3]*tp2)+(TxtArr1[z1,4]*TxtArr1[z1,4]))/(un*1000)) to urech
+                        * Berech. Spannungsfall d. 1. Teillänge, Drehstrom, Al
+                  else
+                     store urech+(t1*srech*sqrt((TxtArr1[z1,2]*tp2*TxtArr1[z1,2]*tp2)+(TxtArr1[z1,4]*TxtArr1[z1,4]))/(un*1000)) to urech
+                        * Berech. Spannungsfall d. 1. Teillänge, Drehstrom, Cu
+                  endif
+               endif
+               TxtArr2.grow(1)  && TxtArr2 vergrößern
+               store z2+1 to z2
+               if ka<56
+                  store "Al" to TxtArr2[z2,3]  && Leitermaterial in TxtArr2 speichern, Al
+               else
+                  store "Cu" to TxtArr2[z2,3]  && Leitermaterial in TxtArr2 speichern, Cu
+               endif
+               store t1 to TxtArr2[z2,5]  && Teillänge in TxtArr2 speichern
+               store TxtArr1[z1,1] to TxtArr2[z2,6]  && Querschnitt in TxtArr2 speichern
+               store un to TxtArr2[z2,1]  && Nennspannung in TxtArr2 speichern
+               store tp1 to TxtArr2[z2,4]  && Temperatur in TxtArr2 speichern
+               if dstrom=0
+                  store "Ws" to TxtArr2[z2,2]
+                  if ka<56
+                     store 2*t1*srech*sqrt((TxtArr1[z1,3]*tp2*TxtArr1[z1,3]*tp2)+(TxtArr1[z1,4]*TxtArr1[z1,4]))/(un*1000) to TxtArr2[z2,8]
+                        * Spannungsfall in TxtArr2 speichern f. Ws, Al, 1. Teillänge
+                  else
+                     store 2*t1*srech*sqrt((TxtArr1[z1,2]*tp2*TxtArr1[z1,2]*tp2)+(TxtArr1[z1,4]*TxtArr1[z1,4]))/(un*1000) to TxtArr2[z2,8]
+                        * Spannungsfall in TxtArr2 speichern f. Ws, Cu, 1. Teillänge
+                  endif
+                  store TxtArr2[z2,8]*100/un to TxtArr2[z2,9]  && proz. Spannungsfall in TxtArr2 speichern f. Ws u. 1. Teillänge
+                  store srech/un to TxtArr2[z2,7]  && Stromstärke in TxtArr2 speichern
+               else
+                  store "Ds" to TxtArr2[z2,2]
+                  if ka<56
+                     store t1*srech*sqrt((TxtArr1[z1,3]*tp2*TxtArr1[z1,3]*tp2)+(TxtArr1[z1,4]*TxtArr1[z1,4]))/(un*1000) to TxtArr2[z2,8]
+                        * Spannungsfall in TxtArr2 speichern f. Ds, Al, 1. Teillänge
+                  else
+                     store t1*srech*sqrt((TxtArr1[z1,2]*tp2*TxtArr1[z1,2]*tp2)+(TxtArr1[z1,4]*TxtArr1[z1,4]))/(un*1000) to TxtArr2[z2,8]
+                        * Spannungsfall in TxtArr2 speichern f. Ds, Cu, 1. Teillänge
+                  endif
+                  store TxtArr2[z2,8]*100/un to TxtArr2[z2,9]  && proz. Spannungsfall in TxtArr2 speichern f. Ds u. 1. Teillänge
+                  store srech/(un*sqrt(3)) to TxtArr2[z2,7]  && Stromstärke in TxtArr2 speichern
+               endif
+            else
+               if dstrom=0
+                  if ka<56
+                     store urech+(2*tl*srech*sqrt((TxtArr1[z1,3]*tp2*TxtArr1[z1,3]*tp2)+(TxtArr1[z1,4]*TxtArr1[z1,4]))/(un*1000)) to urech
+                        * Berech. Spannungsfall d. n. Teillänge, Wechselstrom, Al
+                  else
+                     store urech+(2*tl*srech*sqrt((TxtArr1[z1,2]*tp2*TxtArr1[z1,2]*tp2)+(TxtArr1[z1,4]*TxtArr1[z1,4]))/(un*1000)) to urech
+                        * Berech. Spannungsfall d. n. Teillänge, Wechselstrom, Cu
+                  endif
+               else
+                  if ka<56
+                     store urech+(tl*srech*sqrt((TxtArr1[z1,3]*tp2*TxtArr1[z1,3]*tp2)+(TxtArr1[z1,4]*TxtArr1[z1,4]))/(un*1000)) to urech
+                        * Berech. Spannungsfall d. n. Teillänge, Drehstrom, Al
+                  else
+                     store urech+(tl*srech*sqrt((TxtArr1[z1,2]*tp2*TxtArr1[z1,2]*tp2)+(TxtArr1[z1,4]*TxtArr1[z1,4]))/(un*1000)) to urech
+                        * Berech. Spannungsfall d. n. Teillänge, Drehstrom, Cu
+                  endif
+               endif
+               TxtArr2.grow(1)  && TxtArr2 vergrößern
+               store z2+1 to z2
+               if ka<56
+                  store "Al" to TxtArr2[z2,3]
+               else
+                  store "Cu" to TxtArr2[z2,3]  && Leitermaterial in TxtArr2 speichern
+               endif
+               store tl to TxtArr2[z2,5]  && Teillänge in TxtArr2 speichern
+               store TxtArr1[z1,1] to TxtArr2[z2,6]  && Querschnitt in TxtArr2 speichern
+               store un to TxtArr2[z2,1]  && Nennspannung in TxtArr2 speichern
+               store tp1 to TxtArr2[z2,4]  && Temperatur in TxtArr2 speichern
+               if dstrom=0
+                  store "Ws" to TxtArr2[z2,2]
+                  if ka<56
+                     store 2*tl*srech*sqrt((TxtArr1[z1,3]*tp2*TxtArr1[z1,3]*tp2)+(TxtArr1[z1,4]*TxtArr1[z1,4]))/(un*1000) to TxtArr2[z2,8]
+                        * Spannungsfall in TxtArr2 speichern f. Ws, Al, weitere Teillängen
+                  else
+                     store 2*tl*srech*sqrt((TxtArr1[z1,2]*tp2*TxtArr1[z1,2]*tp2)+(TxtArr1[z1,4]*TxtArr1[z1,4]))/(un*1000) to TxtArr2[z2,8]
+                        * Spannungsfall in TxtArr2 speichern f. Ws, Cu, weitere Teillängen
+                  endif
+                  store TxtArr2[z2,8]*100/un to TxtArr2[z2,9]  && proz. Spannungsfall in TxtArr2 speichern f. Ws u. weitere Teillängen
+                  store srech/un to TxtArr2[z2,7]  && Stromstärke in TxtArr2 speichern
+               else
+                  store "Ds" to TxtArr2[z2,2]
+                  if ka<56
+                     store tl*srech*sqrt((TxtArr1[z1,3]*tp2*TxtArr1[z1,3]*tp2)+(TxtArr1[z1,4]*TxtArr1[z1,4]))/(un*1000) to TxtArr2[z2,8]
+                        * Spannungsfall in TxtArr2 speichern f. Ds, Al, weitere Teillängen
+                  else
+                     store tl*srech*sqrt((TxtArr1[z1,2]*tp2*TxtArr1[z1,2]*tp2)+(TxtArr1[z1,4]*TxtArr1[z1,4]))/(un*1000) to TxtArr2[z2,8]
+                        * Spannungsfall in TxtArr2 speichern f. Ds, Cu, weitere Teillängen
+                  endif
+                  store TxtArr2[z2,8]*100/un to TxtArr2[z2,9]  && proz. Spannungsfall in TxtArr2 speichern f. Ds u. weitere Teillängen
+                  store srech/(un*sqrt(3)) to TxtArr2[z2,7]  && Stromstärke in TxtArr2 speichern
+               endif
+            endif
+            store zrech-1 to zrech  && Anschlußreduzierung je Umlauf
+            store srech+s to srech  && Leistungserhöhung je Umlauf
+         enddo
+         store TxtArr1[z1,1] to form.eingabefeld1.value  && Anzeige zur Laufzeit
+         sleep 0.5
+			*
+         if z1<15
+            store z1+1 to z1  && Querschnittserhöhung je Umlauf, nächste Zeile TxtArr1
+         else
+            store " Fehler ! Kabelquerschnitt 300 qmm ist nicht ausreichend !" to bem
+            store 0 to urech  && ... führt zum Abbruch der Schleife
+         endif
+      enddo
+      store srech-s to srech  && Korrektur vor Anzeige
+		store z1-1 to z1  && Korrektur vor Anzeige
+      store TxtArr1[z1,1] to form.eingabefeld1.value  && Anzeige des Querschnitts
+      if dstrom=0
+         store srech/un to form.eingabefeld2.value  && Anzeige des Scheinstroms, Wechselstrom
+      endif
+      if dstrom=1
+         store srech/(un*sqrt(3)) to form.eingabefeld2.value  && Anzeige des Scheinstroms, Drehstrom
+      endif
+      store srech to form.eingabefeld3.value  && Anzeige der Scheinleistung
+      store bem to form.eingabefeld4.value  && Anzeige der Bemerkung
+      play sound filename "meldung.wav"
+		* Summierungen
+      TxtArr2.grow(1)  && TxtArr2 vergrößern
+      store z2+1 to z2
+      store "%%" to TxtArr2[z2,1],TxtArr2[z2,2],TxtArr2[z2,3],TxtArr2[z2,4],TxtArr2[z2,5],TxtArr2[z2,6]
+		store "Summen:" to TxtArr2[z2,7]
+      * Summierung des Spannungsfalls über die gesamte Strecke
+      store 0 to x
+		for z1=1 to alen(TxtArr2,1)  && Zeilen des TxtArr2 abarbeiten
+      	store TxtArr2[z1,8] to m
+         store m+" _" to m
+         store x+val(m) to x
+      next
+      store x to TxtArr2[z2,8]
+      * Summierung des proz. Spannungsfalls über die gesamte Strecke
+      store 0 to x
+		for z1=1 to alen(TxtArr2,1)  && Zeilen des TxtArr2 abarbeiten
+      	store TxtArr2[z1,9] to m
+         store m+" _" to m
+         store x+val(m) to x
+      next
+      store x to TxtArr2[z2,9]
+		*
+      sleep 0.5
+		* TxtArr2 in CSV-Datei ausgeben
+		set directory to &ORGVERZ
+  		delete file quer.csv
+		set alternate to "quer.csv"
+		SET ALTERNATE ON
+		?? '"'+"Un (V)"+'"'+";"+'"'+"Netz (DS/WS)"+'"'+";"+'"'+"Leitermaterial"+'"'+";"+'"'+"Temp. (Grd.Cels.)"+'"'+";"+'"'+"Länge (m)"+'"'+";"+'"'+"Querschn. (mm²)"+'"'+";"+'"'+"I (A)"+'"'+";"+'"'+"Spannungsfall (V)"+'"'+";"+'"'+"Sp.fall (%)"+'"'
+		*? '"'+"Un (V)"+'"'+";"+'"'+"Netz (DS/WS)"+'"'+";"+'"'+"Leitermaterial"+'"'+";"+'"'+"Temp. (Grd.Cels.)"+'"'+";"+'"'+"Länge (m)"+'"'+";"+'"'+"Querschn. (mm²)"+'"'+";"+'"'+"I (A)"+'"'+";"+'"'+"Spannungsfall (V)"+'"'+";"+'"'+"Sp.fall (%)"+'"'
+		for z2=1 to alen(TxtArr2,1)-1  && Zeilen des TxtArr2 abarbeiten, außer letzte leere Zeile (?)
+        	? '"'+TxtArr2[z2,1]+'"'+";"+'"'+TxtArr2[z2,2]+'"'+";"+'"'+TxtArr2[z2,3]+'"'+";"+'"'+TxtArr2[z2,4]+'"'+";"+'"'+TxtArr2[z2,5]+'"'+";"+'"'+TxtArr2[z2,6]+'"'+";"+'"'+TxtArr2[z2,7]+'"'+";"+'"'+TxtArr2[z2,8]+'"'+";"+'"'+TxtArr2[z2,9]+'"'
+      next
+		SET ALTERNATE OFF
+		CLOSE ALTERNATE
+      sleep 1
+      * CSV-Viewer starten
+		set directory to &ORGVERZ
+		store "start "+orgverz+"\csvfileview.exe /load "+orgverz+"\quer.csv" to m
+		run (.f.,m)
+   return
+
+   * Ende
+   
+   Procedure SCHALTFLAECHE3_OnClick
+      form.close()
+   return
+
+   * Formulareigenschaften
+
+   Procedure Form_OnGotFocus
+      set directory to &ORGVERZ
+   return
+
+   Procedure Form_OnOpen
+      set directory to &ORGVERZ
+      play sound filename "meldung.wav"
+   return
+   
+   Procedure Form_OnClose
+      set directory to &ORGVERZ
+      play sound filename "meldung.wav"
+   return
+
+   * Spinbox
+   
+   Procedure SPINBOX_ONCHANGE
+      store "" to form.eingabefeld1.value
+      store "" to form.eingabefeld2.value
+      store "" to form.eingabefeld3.value
+      store "" to form.eingabefeld4.value
+   return
+
+ENDCLASS

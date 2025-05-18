@@ -1,0 +1,118 @@
+Project File generated 07.05.2025 14:20:19
+
+[Project]
+Name=QD
+DefaultDir=.
+MainProjectFileName=D:\Lutz\Documents\Sw_Proj\QD\v8.00\quer.prg
+Parameters=
+Author=L. Richter
+Description=QD
+Preprocessor=
+LogFileName=D:\Lutz\Documents\Sw_Proj\QD\v8.00\qd.txt
+PrefPathFormat=R
+TargetFileName=Quer.exe
+IconFileName=D:\Lutz\Documents\Sw_Proj\QD\v8.00\Quer.ico
+SplashFileName=D:\Lutz\Documents\Sw_Proj\QD\v8.00\Quer.bmp
+MostRecentSelectedFileName=
+WebApplication=false
+DeoOption=False
+enableUAC=0
+inioption=1
+
+[Contents]
+D:\Lutz\Documents\Sw_Proj\QD\v8.00\quer.prg,0,0,0, 
+D:\Lutz\Documents\Sw_Proj\QD\v8.00\Qd.dll,0,0,0, 
+D:\Lutz\Documents\Sw_Proj\QD\v8.00\Quer.bmp,0,1,0, 
+D:\Lutz\Documents\Sw_Proj\QD\v8.00\Quer.ico,0,1,0, 
+D:\Lutz\Documents\Sw_Proj\QD\v8.00\quer.wfm,0,0,0, 
+D:\Lutz\Documents\Sw_Proj\QD\v8.00\Versionen.txt,0,0,0, 
+D:\Lutz\Documents\Sw_Proj\QD\v8.00\Meldung.wav,0,0,0, 
+D:\Lutz\Documents\Sw_Proj\QD\v8.00\Qd.pdf,0,0,0, 
+D:\Lutz\Documents\Sw_Proj\QD\v8.00\CSVFileView.chm,0,0,0, 
+D:\Lutz\Documents\Sw_Proj\QD\v8.00\CSVFileView.exe,0,0,0, 
+D:\Lutz\Documents\Sw_Proj\QD\v8.00\qd.mnu,0,0,0, 
+
+[DEO]
+
+[INNO]
+ProjectExeFileName=D:\Lutz\Documents\Sw_Proj\QD\v8.00\Quer.exe
+ProjectMainFileName=\Project\Explorer.iss
+ProjectdBaseVersion=dBASE PLUS 2.80  b2215 (04/25/2012-DE120425)
+DefaultDirName={pf}\{#AppName}
+AppName=QD
+AppVersion=1.0.0.0
+SM_dBASERuntime=false
+dBPlus=true
+dBSeparat=false
+Resource=false
+dBASELang=DE
+dBaseRuntimeDir=C:\Programme\dBASE\Plus\Runtime\PlusRuntime-b2215.exe
+XPLook=false
+dBaseBuild=2215
+dBaseVersion=2800
+SetupLang=de
+SepDestDir=false
+BDEGroupEntries=false
+dBProgressbar=false
+dBProgressbox=false
+dBSilent=false
+dBDestRuntime=
+dBDestBDE=
+SourceFolder=D:\Lutz\Documents\Sw_Proj\QD\v8.00
+InnoScriptname=\Project\Explorer.iss
+LastDBVersion=2800
+LastDBLanguage=DE
+LastCreateDate=
+IncDispGroup=true
+IncUninsEntry=true
+IncDesktopEntry=true
+IncQuickEntry=false
+ENLicense=
+ENBefore=
+ENAfter=
+DELicense=
+DEBefore=
+DEAfter=
+ESLicense=
+ESBefore=
+ESAfter=
+ITLicense=
+ITBefore=
+ITAfter=
+JALicense=
+JABefore=
+JAAfter=
+FRLicense=
+FRBefore=
+FRAfter=
+DKLicense=
+DKBefore=
+DKAfter=
+PLLicense=
+PLBefore=
+PLAfter=
+NLLicense=
+NLBefore=
+NLAfter=
+UninsHS=true
+UninsHSAppName=
+UninsHSAppId=
+UninsHSLanguages=All
+BDEUseSettings=false
+BDEMaxFileHandle=255
+BDELangDriver='ascii' ANSI
+BDELevel=7
+BDEMemoBlockSize=1024
+BDEMDXBlockSize=1024
+INNOINI=true
+INIERRORHANDLING=false
+INITRAP=true
+ININOBDE=true
+Icon1={group}\{#AppName} >> {app}\Quer.exe
+Files1=D:\Lutz\Documents\Sw_Proj\QD\v8.00\Qd.dll >> DestDir: {app}
+Files2=D:\Lutz\Documents\Sw_Proj\QD\v8.00\Versionen.txt >> DestDir: {app}
+Files3=D:\Lutz\Documents\Sw_Proj\QD\v8.00\Meldung.wav >> DestDir: {app}
+Files4=D:\Lutz\Documents\Sw_Proj\QD\v8.00\Qd.pdf >> DestDir: {app}
+Files5=D:\Lutz\Documents\Sw_Proj\QD\v8.00\CSVFileView.chm >> DestDir: {app}
+Files6=D:\Lutz\Documents\Sw_Proj\QD\v8.00\CSVFileView.exe >> DestDir: {app}
+Files7=D:\Lutz\Documents\Sw_Proj\QD\v8.00\Quer.exe >> DestDir: {app}

@@ -1,0 +1,86 @@
+
+QD - ein spezielles Programm für die Querschnittsberechnung von Kabeln in
+Wechselstrom- und Drehstromnetze nach dem Spannungsfall
+
+Das Programm eignet sich besonders für die schnelle Berechnung von
+Kabelstrecken, an welche in regelmäßigen Abständen sehr viele gleiche
+Lasten angeschlossen sind, z. B. Beleuchtungsanlagen in Eisenbahntunneln,
+auf Bahnsteigen und an Straßen.
+
+Das Programm wurde mit dBase Plus v2.8 kompiliert. Voraussetzung
+für Installation und Betrieb ist Microsoft Windows ab Windows XP
+sowie ein Programm zum Anzeigen von PDF-Dateien.
+
+Für die weitere Nutzung der berechneten Daten sollte ein
+Tabellenkalkulationsprogramm installiert sein.
+
+Der Farbbildschirm sollte eine Auflösung von 1024 x 768 Pixeln haben.
+
+
+Neu in Version 8.00 vom 30.05.2025
+----------------------------------
+
+- Dokumente "Spannungsfall_in_E-Anlagen" und "Maximale_Leitungslaengen_ABB"
+  aus dem Hilfemenü entfernt.
+- Hilfedatei aktualisiert.
+
+
+Neu in Version 7.01 vom 04.09.2020
+----------------------------------
+
+- Hilfedatei aktualisiert.
+
+
+Neu in Version 7.00 vom 17.05.2016
+----------------------------------
+
+- portable Version, BDE entfernt
+- Anzeige der Ergebnisse mit CsvFileView
+
+
+Neu in Version 6.35 vom 25.03.2009
+----------------------------------
+
+- Zusammenstellung "Spannungsfall in E-Anlagen" (Hr. Kahler, EBA Dresden)
+  zur Hilfe im Programm hinzugefügt.
+
+
+Neu in Version 6.34:
+--------------------
+
+- Die Hilfedatei wurde verbessert.
+- Shelexec wurde durch Start ersetzt.
+
+
+Neu in Version 6.33:
+--------------------
+
+- Die Hilfedatei wurde verbessert.
+- Die Voreinstellung des Programms wurde auf Drehstrom geändert.
+
+
+Neu in Version 6.32:
+--------------------
+
+- Das Programm wurde auf dBase Plus umgestellt.
+- Die Leitertemperatur wird bei der Berechnung berücksichtigt.
+
+
+Neu in Version 6.01:
+--------------------
+
+- Div. Formfehler wurden beseitigt.
+- In der Ausgabetabelle der Berechnungsergebnisse wird
+  die Summe der prozentualen Spannungsfälle aller Teilabschnitte
+  gebildet.
+
+
+Neu in Version 6:
+-----------------
+
+- Die Berechnung erfolgt auf der Grundlage von Resistanz- und
+  Reaktanzbelägen, entnommen d. VDE-Schriftenreihe 118.
+- Der Aufruf der Tabellenkalkulation (z. B. MS Excel) muss nicht
+  mehr besonders konfiguriert werden. Es wird das mit dem
+  Dateityp XLS verknüpfte Programm gestartet.
+- Die Hilfedatei wurde verbessert.
